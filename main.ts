@@ -5,7 +5,10 @@ import mongoose from "npm:mongoose@7.6.3";
 import { Query } from "./resolvers/query.ts";
 import { Mutation } from "./resolvers/mutation.ts";
 
-const MONGO_URL = Deno.env.get("MONGO_URL");
+import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts";
+const env = await load();
+
+const MONGO_URL = env.MONGO_URL || Deno.env.get("MONGO_URL");
 
 if (!MONGO_URL) {
   console.log("No mongo URL found");
